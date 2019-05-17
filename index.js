@@ -1,10 +1,22 @@
-const express = require('express');
-const app = express();
+const { getVersionOfSubscribeByDate } = require('./exercise1/exercise1');
 
-app.get('/', function (req, res) {
-  res.send('Hello World!')
-});
+const date = '2019/02/16';
+const customer = {
+  _id: '1234567890',
+  identity : { lastname : 'X' },
+  subscription: {
+    _id: 'qwertyuio',
+    service: {
+      name: 'Aide à l\'autonomie',
+    },
+    versions: [
+      { startDate: '2019/04/15', unitTTCPrice: 22 },
+      { startDate: '2019/02/01', unitTTCPrice: 24 },
+      { startDate: '2019/03/01', unitTTCPrice: 21 },
+    ],
+  },
+};
+const version = getVersionOfSubscribeByDate(date, customer.subscription);
+// console.log(`Mme X est actuellement dans la version : \n ${version}`);
 
-app.listen(3000, function () {
-  console.log('Example app listening on port 3000!')
-});
+console.log('version', version);
